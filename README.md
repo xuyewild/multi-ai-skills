@@ -32,7 +32,7 @@ Not useful for one-off Q&A.
 **Claude Code**: copy the skill folders you want into `~/.claude/skills/` (global) or `.claude/skills/` in your project.
 
 ```bash
-git clone https://github.com/Vsuperdouble/multi-ai-skills
+git clone https://github.com/xuyewild/multi-ai-skills
 cp -r multi-ai-skills/skills/en/multi-ai-handoff ~/.claude/skills/
 cp -r multi-ai-skills/skills/en/project-memory ~/.claude/skills/
 ```

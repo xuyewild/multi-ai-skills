@@ -32,7 +32,7 @@
 **Claude Code**：把要用的 skill 文件夹复制到 `~/.claude/skills/`（全局）或项目里的 `.claude/skills/`。
 
 ```bash
-git clone https://github.com/Vsuperdouble/multi-ai-skills
+git clone https://github.com/xuyewild/multi-ai-skills
 cp -r multi-ai-skills/skills/zh/multi-ai-handoff ~/.claude/skills/
 cp -r multi-ai-skills/skills/zh/project-memory ~/.claude/skills/
 ```
