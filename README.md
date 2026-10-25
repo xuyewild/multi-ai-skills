@@ -4,34 +4,33 @@
 
 English | [中文](README.zh-CN.md)
 
-Two skills that keep long projects sane when several AIs (Claude, Codex, ChatGPT, subagents) work on them together, and keep paid generation from burning money. They come from half a year of AI comic-drama production: one director, a few AIs, dozens of episodes, dozens of paid video generations a day, and several fresh conversations every day.
+I've been making AI comic dramas with Claude and Codex for about six months. Thousands of clips so far, and I open a few fresh chats every day.
 
-| Skill | What it solves |
-|---|---|
-| [multi-ai-handoff](skills/en/multi-ai-handoff/SKILL.md) | Who executes, who checks, who decides; handoff through files; independent review before every handoff; pick the model by difficulty; log paid generation before clicking |
-| [project-memory](skills/en/project-memory/SKILL.md) | The project folder is the memory; human corrections are written back by type; a rule ledger holds only rules the owner set; a new conversation reads the files to know where to resume |
+The thing I learned: the problem with AI isn't that it's dumb, it's that it gets messy. Open a new chat and it has no idea where we left off. Worse, it "remembers" things I never said. I tested this once. In the first chat it decided on its own that a scene happens at dusk. In the next chat it treated dusk as my call. Then there's the AI that reviews its own work and says it's fine, and the paid generation that hangs so you can't tell if you just got charged.
 
-Each skill works on its own; they work best together. Every skill ships in English (`skills/en/`) and Chinese (`skills/zh/`). Both versions have the same content and each installs on its own.
+This repo is what I ended up doing about it. Two skills.
 
-## Who it is for
+**multi-ai-handoff** is about who does what. Who does the work, who checks it, who makes the call. Handoffs go through files, and a different AI looks it over first. Paid generations get logged before you click. Pick the model by how hard the job is, don't throw the priciest one at everything.
 
-- You use AI for video, images, long documents or multi-round code, and a project runs for days across many conversations.
-- You use two or more AIs at once, or split work across subagents.
-- You pay for generation, so rework is expensive.
+**project-memory** is about remembering. Progress and rules go in the project folder, so a new chat reads the files and knows what's next. The rule ledger only has things I actually said. AI guesses don't count.
 
-Not useful for one-off Q&A.
+You can install either one alone, but they're better together. English is in `skills/en/`, Chinese in `skills/zh/`, same content.
 
-## The core ideas
+## Is this for you?
 
-- **AIs trust files, not conversation.** Progress is whatever is in the folder.
-- **Every handoff gets an independent check.** Authors never pass their own work. Review records carry file hashes and expire as soon as a file changes.
-- **Money and decisions belong to the human.** Paid actions are reserved, clicked once, then settled. If you are not sure a click went through, reconcile first; never click again.
-- **Pick the tier by difficulty.** `S = 2N + 2K + A + F − 2E`. Spend top-tier models only on design.
-- **Record only rules the owner set, in their exact words.** AI guesses never become rules.
+If your project runs for days across a bunch of chats, or you've got several AIs going at once, or generation costs money and redoing stuff hurts, yes. If you're just asking a question or two, you don't need it.
+
+## The rules I stick to now
+
+- Chat history doesn't count. If it's not in a file, it didn't happen.
+- Nobody approves their own work. A different AI checks it. The check saves file hashes, so if the file changes, the old "pass" is gone.
+- Only I spend money or make decisions. Log the paid action, click once. If you're not sure it went through, go look on the platform. Don't just click again.
+- Score the task before picking a model: `S = 2N + 2K + A + F − 2E`. Save the expensive models for work that needs real thinking.
+- Rules get copied in my exact words.
 
 ## 30-second example
 
-The paid-action ledger refuses a second click while the first one is in an unknown state:
+The ledger won't let you click again while the last attempt is in an unknown state:
 
 ```console
 $ S=skills/en/multi-ai-handoff/scripts/ledger.py
@@ -55,29 +54,29 @@ cp -r multi-ai-skills/skills/en/multi-ai-handoff ~/.claude/skills/
 cp -r multi-ai-skills/skills/en/project-memory ~/.claude/skills/
 ```
 
-For tiered subagents, copy `skills/en/multi-ai-handoff/templates/tier-agents/` and `templates/independent-reviewer.md` into your project's `.claude/agents/`. This repo uses the same agents in [.claude/agents/](.claude/agents/).
+If you want the tiered subagents, copy `skills/en/multi-ai-handoff/templates/tier-agents/` and `templates/independent-reviewer.md` into your project's `.claude/agents/`. This repo uses the same agents in [.claude/agents/](.claude/agents/).
 
 **Claude web or desktop app**: zip a skill folder and upload it as a custom skill in settings.
 
-**Other AIs**: a skill is just Markdown plus Python scripts. Give the AI `SKILL.md` and the reference files it points to.
+**Other AIs**: a skill is just some Markdown and a few Python scripts. Hand the AI `SKILL.md` and whatever reference files it points to.
 
 ## Scripts
 
-Python standard library only, 3.9+.
+Python standard library only, 3.9 or newer.
 
 | Script | What it does |
 |---|---|
-| `multi-ai-handoff/scripts/review_gate.py` | Records review verdicts with file hashes; checks before a handoff whether it may proceed |
-| `multi-ai-handoff/scripts/ledger.py` | Ledger for paid actions: budget, retry cap, no re-click while a state is unknown |
+| `multi-ai-handoff/scripts/review_gate.py` | Records review verdicts with file hashes, and checks before a handoff whether it can go through |
+| `multi-ai-handoff/scripts/ledger.py` | Ledger for paid actions: budget, retry cap, and no second click while a state is unknown |
 | `project-memory/scripts/check_project.py` | Checks the rule ledger format and the project's key files |
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-## Contributing
+## Feedback
 
-Issues and PRs are welcome, especially problems you hit after using these in your own project. When proposing a rule change, describe the situation where things went wrong.
+Open an issue if something breaks, especially after you've tried it on a real project. If you think a rule is wrong, tell me what you were doing and what went sideways.
 
 ## License
 

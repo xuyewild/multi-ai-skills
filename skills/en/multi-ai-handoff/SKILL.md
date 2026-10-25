@@ -8,7 +8,7 @@ metadata:
 
 # Multi-AI Division of Labor and Handoff
 
-This practice comes from half a year of AI comic-drama production: one director, Claude, Codex, and several subagents, with dozens of paid video generations every day. The core is one sentence: **AIs trust files, not conversation; every handoff gets checked; spending money and making decisions belong to the human alone.**
+This practice comes from half a year of AI comic-drama production: one director, Claude, Codex, and several subagents, thousands of clips in total, with dozens of paid video generations every day. The core is one sentence: **AIs trust files, not conversation; every handoff gets checked; spending money and making decisions belong to the human alone.**
 
 ## 1. Three roles
 

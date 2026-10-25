@@ -8,7 +8,7 @@ metadata:
 
 # Project Memory and Context Management
 
-This method comes from six months of AI manga-drama production: dozens of episodes, hundreds of paid generations, and several new conversations every day. Conversations get compressed, models get swapped, and people take over. "We talked about it last time" does not hold up. The core idea is one sentence: **the project folder is the memory. What was said in a conversation does not count. What is written in a file counts. Rules the owner set are recorded in their own words. AI guesses are not recorded.**
+This method comes from six months of AI manga-drama production: thousands of clips, and several new conversations every day. Conversations get compressed, models get swapped, and people take over. "We talked about it last time" does not hold up. The core idea is one sentence: **the project folder is the memory. What was said in a conversation does not count. What is written in a file counts. Rules the owner set are recorded in their own words. AI guesses are not recorded.**
 
 The companion skill `multi-ai-handoff` covers who executes, who checks, who decides, and how to hand off. This skill covers where things live, what to record, and how to pick up after a break.
 
