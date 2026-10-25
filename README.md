@@ -1,5 +1,7 @@
 # multi-ai-skills
 
+[![tests](https://github.com/xuyewild/multi-ai-skills/actions/workflows/tests.yml/badge.svg)](https://github.com/xuyewild/multi-ai-skills/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 English | [中文](README.zh-CN.md)
 
 Two skills that keep long projects sane when several AIs (Claude, Codex, ChatGPT, subagents) work on them together, and keep paid generation from burning money. They come from half a year of AI comic-drama production: one director, a few AIs, dozens of episodes, dozens of paid video generations a day, and several fresh conversations every day.
@@ -26,6 +28,22 @@ Not useful for one-off Q&A.
 - **Money and decisions belong to the human.** Paid actions are reserved, clicked once, then settled. If you are not sure a click went through, reconcile first; never click again.
 - **Pick the tier by difficulty.** `S = 2N + 2K + A + F − 2E`. Spend top-tier models only on design.
 - **Record only rules the owner set, in their exact words.** AI guesses never become rules.
+
+## 30-second example
+
+The paid-action ledger refuses a second click while the first one is in an unknown state:
+
+```console
+$ S=skills/en/multi-ai-handoff/scripts/ledger.py
+$ python3 $S demo.json init --unit credits --limit 500
+ok
+$ python3 $S demo.json reserve --id shot1-a1 --item shot1 --cost 120
+ok
+$ python3 $S demo.json unknown --id shot1-a1      # clicked, not sure it went through
+ok
+$ python3 $S demo.json reserve --id shot1-a2 --item shot1 --cost 120 --kind retry
+REFUSED shot1 has an attempt in state `unknown`; reconcile with the platform first
+```
 
 ## Install
 

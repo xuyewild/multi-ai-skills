@@ -1,5 +1,7 @@
 # multi-ai-skills
 
+[![tests](https://github.com/xuyewild/multi-ai-skills/actions/workflows/tests.yml/badge.svg)](https://github.com/xuyewild/multi-ai-skills/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 [English](README.md) | 中文
 
 让多个 AI（Claude、Codex、ChatGPT、子 agent）一起做长项目时不乱、不白花钱的两个 skill。来自半年 AI 漫剧生产实战：一个导演，加上几个 AI，几十集、每天几十次付费视频生成、每天换好几个对话。
@@ -26,6 +28,22 @@
 - **花钱和拍板只归人。** 付费动作先预留、只点一次、再结算；点了不确定就先对账，不重按。
 - **按难度选档。** `S = 2N + 2K + A + F − 2E`，高档模型只用在设计上。
 - **只记人定过的规则，原话原样抄。** AI 的推测不写成规则。
+
+## 30 秒例子
+
+付费动作账本：上一次点了但状态不明，就不让再点：
+
+```console
+$ S=skills/zh/multi-ai-handoff/scripts/ledger.py
+$ python3 $S demo.json init --unit credits --limit 500
+ok
+$ python3 $S demo.json reserve --id shot1-a1 --item shot1 --cost 120
+ok
+$ python3 $S demo.json unknown --id shot1-a1      # 点了，不确定平台收没收到
+ok
+$ python3 $S demo.json reserve --id shot1-a2 --item shot1 --cost 120 --kind retry
+REFUSED shot1 has an attempt in state `unknown`; reconcile with the platform first
+```
 
 ## 安装
 
