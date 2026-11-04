@@ -3,6 +3,8 @@ frontmatter valid, relative links resolve, nothing private leaked."""
 import re
 import unittest
 
+import yaml
+
 from helpers import LANGS, ROOT, SKILLS
 
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
@@ -39,6 +41,17 @@ class RepoTest(unittest.TestCase):
                     self.assertEqual(fm.get("name"), name)
                     self.assertEqual(fm.get("license"), "MIT")
                     self.assertTrue(10 < len(fm.get("description", "")) <= 1024)
+
+    def test_frontmatter_is_valid_yaml(self):
+        for lang in LANGS:
+            for name in skill_names(lang):
+                with self.subTest(lang=lang, skill=name):
+                    text = (SKILLS / lang / name / "SKILL.md").read_text(encoding="utf-8")
+                    m = re.match(r"---\n(.*?)\n---\n", text, re.S)
+                    self.assertIsNotNone(m)
+                    data = yaml.safe_load(m.group(1))
+                    self.assertEqual(data.get("name"), name)
+                    self.assertIsInstance(data.get("description"), str)
 
     def test_relative_links_resolve(self):
         for md in ROOT.rglob("*.md"):
