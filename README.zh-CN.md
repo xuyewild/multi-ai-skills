@@ -46,7 +46,15 @@ REFUSED shot1 has an attempt in state `unknown`; reconcile with the platform fir
 
 ## 安装
 
-**Claude Code**：把要用的 skill 文件夹复制到 `~/.claude/skills/`（全局）或者项目里的 `.claude/skills/`。
+**Claude Code**（2.1.275 及以上）一行装好：
+
+```
+/plugin install multi-ai-skills-zh --marketplace xuyewild/multi-ai-skills
+```
+
+英文版换成 `multi-ai-skills-en`。老版本先跑 `/plugin marketplace add xuyewild/multi-ai-skills`，再 `/plugin install multi-ai-skills-zh@multi-ai-skills`。
+
+也可以把要用的 skill 文件夹复制到 `~/.claude/skills/`（全局）或者项目里的 `.claude/skills/`。
 
 ```bash
 git clone https://github.com/xuyewild/multi-ai-skills

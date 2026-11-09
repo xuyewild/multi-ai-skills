@@ -1,0 +1,13 @@
+{
+  "name": "multi-ai-skills",
+  "owner": { "name": "xuyewild" },
+  "description": "Skills for long projects where several AIs work together: file handoffs, independent review, paid-action ledger, project memory. English and Chinese.",
+  "plugins": [
+    { "name": "multi-ai-skills-en", "source": "./", "strict": false,
+      "description": "multi-ai-handoff + project-memory (English)",
+      "skills": ["./skills/en/multi-ai-handoff", "./skills/en/project-memory"] },
+    { "name": "multi-ai-skills-zh", "source": "./", "strict": false,
+      "description": "multi-ai-handoff + project-memory（中文）",
+      "skills": ["./skills/zh/multi-ai-handoff", "./skills/zh/project-memory"] }
+  ]
+}

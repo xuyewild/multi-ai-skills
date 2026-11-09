@@ -46,7 +46,15 @@ REFUSED shot1 has an attempt in state `unknown`; reconcile with the platform fir
 
 ## Install
 
-**Claude Code**: copy the skill folders you want into `~/.claude/skills/` (global) or `.claude/skills/` in your project.
+**Claude Code** (2.1.275 or later), one line:
+
+```
+/plugin install multi-ai-skills-en --marketplace xuyewild/multi-ai-skills
+```
+
+Use `multi-ai-skills-zh` for the Chinese version. On older versions, run `/plugin marketplace add xuyewild/multi-ai-skills` first, then `/plugin install multi-ai-skills-en@multi-ai-skills`.
+
+Or copy the skill folders you want into `~/.claude/skills/` (global) or `.claude/skills/` in your project.
 
 ```bash
 git clone https://github.com/xuyewild/multi-ai-skills
